@@ -1,0 +1,20 @@
+- name: Install Docker (Moby) on Fedora
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: Ensure dnf-plugins-core is installed
+      dnf:
+        name: dnf-plugins-core
+        state: present
+
+    - name: Install Docker engine (Moby)
+      dnf:
+        name: moby-engine
+        state: present
+
+    - name: Enable and start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
