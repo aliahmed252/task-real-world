@@ -1,0 +1,15 @@
+- name: copy folder from this machine to another
+  hosts: servers
+  become: yes
+
+  tasks:
+    - name: copy folder
+      copy:
+        src: /home/aliahmed/real-world-app
+        dest: /home/aliahmed
+    
+    - name: Run docker compose up
+      community.docker.docker_compose_v2:
+        project_src: /home/aliahmed/real-world-app
+        state: present    
+
